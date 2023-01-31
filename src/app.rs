@@ -1,6 +1,7 @@
 pub mod models;
 pub mod money;
 use std::{
+    fs::File,
     io::Read,
     path::{Path, PathBuf},
 };
@@ -30,7 +31,7 @@ pub fn run() -> Result<()> {
             let mut files = Vec::new();
             let mut directories = Vec::new();
             path.iter()
-                .map(|p| if !p.exists() { handle_err_invalid_path(p) } else { Ok(p) })
+                .map(|p| if !p.exists() { invalid_path_err_eprintln(p) } else { Ok(p) })
                 .map(|x| x.ok())
                 .for_each(|p| {
                     if let Some(pathbuf) = p {
@@ -42,10 +43,10 @@ pub fn run() -> Result<()> {
                     }
                 });
             for f in files.iter() {
-                let mut file = std::fs::File::open(f).unwrap();
+                let mut file = File::open(f).unwrap();
                 let mut contents = String::new();
                 file.read_to_string(&mut contents).unwrap();
-                println!("{:#?}", &contents);
+                println!("{}", &contents);
             }
         }
     }
@@ -55,7 +56,7 @@ pub fn run() -> Result<()> {
     Ok(())
 }
 
-fn handle_err_invalid_path(p: &Path) -> Result<&PathBuf, (PathBuf, Error)> {
+fn invalid_path_err_eprintln(p: &Path) -> Result<&PathBuf, (PathBuf, Error)> {
     eprintln!(
         "{} {} `{}`",
         "!!!".red().bold(),
