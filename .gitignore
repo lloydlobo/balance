@@ -1,0 +1,13 @@
+# Cargo generated
+target
+/target
+**/*.rs.bk
+
+# Environment variables
+.env
+
+.idea
+.vscode
+.vim
+.*.swp
+tags
