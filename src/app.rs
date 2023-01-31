@@ -13,7 +13,7 @@ pub fn run() -> Result<()> {
 
     match command {
         Commands::Acc(account) => {
-            dbg!("Account", account);
+            dbg!(Commands::Acc(account));
             let m_c = money::money_from_str()?;
             dbg!(&m_c);
             let m_c = money::money_minor(m_c, 10_000)?;
@@ -21,7 +21,10 @@ pub fn run() -> Result<()> {
             println!("{}", &m_c.is_positive()); // true
         }
         Commands::Tx(transaction) => {
-            dbg!("Tx", transaction);
+            dbg!(Commands::Tx(transaction));
+        }
+        Commands::Add { path } => {
+            dbg!(Commands::Add { path });
         } // Commands::None => unreachable!(),
     }
 

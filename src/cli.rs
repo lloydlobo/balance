@@ -1,4 +1,4 @@
-use std::fmt::Display;
+use std::{fmt::Display, path::PathBuf};
 
 use clap::{Args, Parser, Subcommand, ValueEnum};
 
@@ -20,6 +20,14 @@ pub enum Commands {
     /// transaction module
     #[command(arg_required_else_help = true)]
     Tx(Tx),
+
+    /// Add things
+    #[command(arg_required_else_help = true)]
+    Add {
+        /// file path(s) to add
+        #[arg(required = true)]
+        path: Vec<PathBuf>,
+    },
 }
 
 #[derive(Debug, Args)]

@@ -9,20 +9,18 @@ fn main() -> anyhow::Result<()> {
     pretty_env_logger::init();
 
     match run() {
-        Ok(it) => it,
+        Ok(it) => Ok(it),
         Err(err) => {
-            return Err(err.context(anyhow!("Failed to run `app`")));
+            eprintln!("{:#?}", err.context(anyhow!("Failed to run `app`")));
+            std::process::exit(1);
         }
-    };
-
-    Ok(())
+    }
 }
 
 #[cfg(test)]
 mod tests {
     // use super::*;
-
-    use assert_cmd::Command;
+    // use assert_cmd::Command;
 
     // assert_cmd aims to simplify the process for doing integration testing of CLIs, including:
     // * Finding your crate's binary to test
