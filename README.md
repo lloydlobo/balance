@@ -36,6 +36,12 @@ transaction = {
 }
 ```
 
+### Database
+
+```sh
+$ balance add balance.yml
+&path = [ "balance.yml", ]
+```
 ## Setup
 
 ### API

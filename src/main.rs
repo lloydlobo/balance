@@ -19,8 +19,12 @@ fn main() -> anyhow::Result<()> {
 
 #[cfg(test)]
 mod tests {
-    // use super::*;
-    // use assert_cmd::Command;
+    use std::io::{self, Read, Write};
+
+    use assert_cmd::Command;
+    use termcolor::{Color, ColorChoice, ColorSpec, StandardStream, WriteColor};
+
+    use super::*;
 
     // assert_cmd aims to simplify the process for doing integration testing of CLIs, including:
     // * Finding your crate's binary to test
@@ -33,5 +37,13 @@ mod tests {
         // let mut cmd = Command::cargo_bin(env!("CARGO_PKG_NAME")).unwrap();
         // let output = cmd.unwrap();
         // println!("{:?}", output);
+    }
+
+    // # Usage
+    // write_red(&format!("Couldn't find...{:?}", p.to_string_lossy())).unwrap();
+    fn write_red(msg: &str) -> io::Result<()> {
+        let mut stdout = StandardStream::stdout(ColorChoice::Always);
+        stdout.set_color(ColorSpec::new().set_fg(Some(Color::Red)))?;
+        writeln!(&mut stdout, "{msg}")
     }
 }
