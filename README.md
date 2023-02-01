@@ -42,6 +42,15 @@ transaction = {
 $ balance add balance.yml
 &path = [ "balance.yml", ]
 ```
+
+### Demo with Docker
+
+Run a docker container to demo the CLI without installing it:
+
+```sh
+docker run lloydlobo/balance
+```
+
 ## Setup
 
 ### API
@@ -49,7 +58,7 @@ $ balance add balance.yml
 Add `SECRET` to the `.env` file as `<your SECRET key>` without `<`/`>`.
 
 ```bashls
-<!-- BALANCE_API_KEY=<your SECRET key> -->
+BALANCE_API_KEY=<your SECRET key>
 ```
 
 ## Install
