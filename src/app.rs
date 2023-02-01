@@ -115,30 +115,18 @@ fn read_write_new_tx(transaction: Transaction) -> Result<()> {
                 print_success(&format!("Created file at `{}`", path), &format!("{file:?}"));
                 file
             }
-            // In comprehensive and thorough tests that want to verify that a test doesn't return
-            // any known incorrect error kind, you may want to cut-and-paste the current full list
-            // of errors from here into your test code, and then match `_` as the correct case. This
-            // seems counterintuitive, but it will make your tests more robust. In particular, if
-            // you want to verify that your code does produce an unrecognized error kind, the robust
-            // solution is to check for all the recognized error kinds and fail in those cases.
-            ErrorKind::PermissionDenied
-            | ErrorKind::ConnectionRefused
-            | ErrorKind::ConnectionReset
-            | ErrorKind::ConnectionAborted
-            | ErrorKind::NotConnected
-            | ErrorKind::AddrInUse
-            | ErrorKind::AddrNotAvailable
-            | ErrorKind::BrokenPipe
-            | ErrorKind::AlreadyExists
-            | ErrorKind::WouldBlock
-            | ErrorKind::InvalidInput
-            | ErrorKind::InvalidData
-            | ErrorKind::TimedOut
-            | ErrorKind::WriteZero
-            | ErrorKind::Interrupted
-            | ErrorKind::Unsupported
-            | ErrorKind::UnexpectedEof
-            | ErrorKind::OutOfMemory
+            #[rustfmt::skip]
+            // In comprehensive and thorough tests that want to verify that a test doesn't return any known incorrect error kind, 
+            // you may want to cut-and-paste the current full list of errors from here into your test code, and then match `_` 
+            // as the correct case. This seems counterintuitive, but it will make your tests more robust. In particular, if you 
+            // want to verify that your code does produce an unrecognized error kind, the robust solution is to check for all the 
+            // recognized error kinds and fail in those cases.
+            ErrorKind::PermissionDenied | ErrorKind::ConnectionRefused | ErrorKind::ConnectionReset
+            | ErrorKind::ConnectionAborted | ErrorKind::NotConnected | ErrorKind::AddrInUse
+            | ErrorKind::AddrNotAvailable | ErrorKind::BrokenPipe | ErrorKind::AlreadyExists
+            | ErrorKind::WouldBlock | ErrorKind::InvalidInput | ErrorKind::InvalidData
+            | ErrorKind::TimedOut | ErrorKind::WriteZero | ErrorKind::Interrupted
+            | ErrorKind::Unsupported | ErrorKind::UnexpectedEof | ErrorKind::OutOfMemory
             | ErrorKind::Other => {
                 let ctx = print_err(&err.kind().to_string(), &anyhow!("{err:#?}").to_string());
                 panic!("{ctx}")
